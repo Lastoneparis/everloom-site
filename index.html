@@ -2,75 +2,122 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Everloom — Private Photos, On Your Device</title>
-<!-- social share (og/twitter) -->
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Hugo Moriceau">
-<meta property="og:title" content="Everloom — Private Photos, On Your Device">
-<meta property="og:description" content="A private, on-device photo gallery with AI search, albums and face grouping — your memories never leave your device.">
-<meta property="og:url" content="https://lastoneparis.github.io/everloom-site/">
-<meta property="og:image" content="https://lastoneparis.github.io/everloom-site/share.png">
-<meta property="og:image:secure_url" content="https://lastoneparis.github.io/everloom-site/share.png">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Everloom — Private Photos, On Your Device">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Everloom — Private Photos, On Your Device">
-<meta name="twitter:description" content="A private, on-device photo gallery with AI search, albums and face grouping — your memories never leave your device.">
-<meta name="twitter:image" content="https://lastoneparis.github.io/everloom-site/share.png">
-
-<meta name="description" content="Everloom is a private, on-device photo gallery with AI search, albums and face grouping. Your memories stay on your device — never in someone else's cloud.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Everloom — a photo library that never leaves your device</title>
+<meta name="description" content="Search your photos by what is in them, group faces and build albums — computed entirely on your iPhone or Mac. No upload, no account, no scanning.">
 <style>
-  :root { color-scheme: light dark; --bg:#fff; --fg:#161618; --muted:#6b7280; --card:#f6f6f8; --accent:#a24bd8; --accent2:#ff7a59; --line:#e5e5ea; }
-  @media (prefers-color-scheme: dark){ :root{ --bg:#0d0d10; --fg:#f2f2f7; --muted:#9a9aa2; --card:#17171c; --line:#26262c; } }
-  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
-  body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-  .wrap{max-width:960px;margin:0 auto;padding:0 22px}
-  header{text-align:center;padding:76px 0 40px}
-  .logo{width:96px;height:96px;border-radius:22px;background:linear-gradient(150deg,var(--accent),var(--accent2));margin:0 auto 22px;display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:0 12px 40px -12px var(--accent)}
-  h1{font-size:2.6rem;line-height:1.1;margin:0 0 12px;letter-spacing:-.03em}
-  .tag{font-size:1.25rem;color:var(--muted);max-width:620px;margin:0 auto 26px}
-  .cta{display:inline-block;background:var(--fg);color:var(--bg);text-decoration:none;font-weight:600;padding:12px 26px;border-radius:999px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;padding:40px 0}
-  .feat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
-  .feat h3{margin:6px 0 6px;font-size:1.05rem} .feat p{margin:0;color:var(--muted);font-size:.95rem}
-  .emoji{font-size:26px}
-  .promise{text-align:center;background:linear-gradient(150deg,color-mix(in srgb,var(--accent) 12%,transparent),color-mix(in srgb,var(--accent2) 12%,transparent));border:1px solid var(--line);border-radius:20px;padding:36px 22px;margin:24px 0}
-  .promise h2{margin:0 0 8px;letter-spacing:-.02em}
-  footer{text-align:center;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:40px;padding:26px 0 60px}
-  footer a{color:var(--accent)}
+:root{--cream:#fdfaf5;--ink:#1f1b16;--soft:#786d61;--rule:#ece3d7;--thread:#a8603c;--deep:#2f5d50}
+@media(prefers-color-scheme:dark){:root{--cream:#14120f;--ink:#f0e9df;--soft:#a2988b;--rule:#2a2620;--thread:#d98a5f;--deep:#6ba694}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--ink);font:16.5px/1.72 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:54rem;margin:0 auto;padding:0 26px}
+header{padding:92px 0 0;max-width:34rem}
+.kicker{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--thread);font-weight:700}
+h1{margin-top:16px;font-size:clamp(33px,6vw,52px);line-height:1.07;letter-spacing:-.032em;font-weight:700}
+.stand{margin-top:18px;color:var(--soft);font-size:18.5px}
+.get{display:inline-block;margin-top:28px;padding:14px 28px;border-radius:999px;background:var(--thread);color:#fff;
+ text-decoration:none;font-weight:650;font-size:15.5px}
+/* the album wall — CSS columns, deliberately uneven like a real library */
+.wall{columns:4 140px;column-gap:10px;margin:62px 0 0}
+.wall i{display:block;width:100%;border-radius:9px;margin-bottom:10px;break-inside:avoid}
+.wall i:nth-child(4n+1){aspect-ratio:3/4;background:linear-gradient(150deg,#e8c9a8,#c98f62)}
+.wall i:nth-child(4n+2){aspect-ratio:1;background:linear-gradient(150deg,#a9c4bb,#4f7a6c)}
+.wall i:nth-child(4n+3){aspect-ratio:4/5;background:linear-gradient(150deg,#d9c3d6,#8a6f95)}
+.wall i:nth-child(4n+4){aspect-ratio:4/3;background:linear-gradient(150deg,#e3d3ab,#a8894d)}
+.wall i:nth-child(7n){aspect-ratio:2/3}
+.cap{margin-top:8px;color:var(--soft);font-size:13.5px;text-align:center}
+/* search demo */
+.search{margin:78px 0 0;border:1px solid var(--rule);border-radius:16px;overflow:hidden;background:var(--cream)}
+.search .field{display:flex;align-items:center;gap:11px;padding:16px 20px;border-bottom:1px solid var(--rule);color:var(--soft)}
+.search .field b{color:var(--ink);font-weight:600}
+.search .field::before{content:"";width:15px;height:15px;border:2px solid var(--soft);border-radius:50%;flex:none;
+ box-shadow:6px 6px 0 -4px var(--soft)}
+.search .res{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;padding:16px 20px}
+.search .res i{aspect-ratio:1;border-radius:7px;background:linear-gradient(150deg,#a9c4bb,#4f7a6c)}
+.search .res i:nth-child(even){background:linear-gradient(150deg,#e8c9a8,#c98f62)}
+.search .note{padding:0 20px 18px;color:var(--soft);font-size:13.5px}
+section{padding:78px 0;border-top:1px solid var(--rule);margin-top:78px}
+h2{font-size:clamp(23px,4vw,31px);letter-spacing:-.028em;font-weight:700;margin-bottom:14px}
+p{color:var(--soft);margin-bottom:14px;max-width:60ch}
+p b,li b{color:var(--ink);font-weight:650}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:10px}
+@media(max-width:700px){.two{grid-template-columns:1fr;gap:26px}.wall{columns:2 120px}}
+.two h3{font-size:17.5px;font-weight:650;margin-bottom:7px}
+.two p{margin-bottom:0;font-size:15.5px}
+.frank{border-radius:16px;padding:26px;background:rgba(168,96,60,.08);border:1px solid var(--rule)}
+.frank b{color:var(--ink)}
+.frank ul{margin:13px 0 0 20px;color:var(--soft)}
+.frank li{margin-bottom:9px;font-size:15.5px}
+a{color:var(--deep)}
+footer{border-top:1px solid var(--rule);padding:32px 0 72px;color:var(--soft);font-size:14px;text-align:center}
 </style>
 </head>
-<body>
-<div class="wrap">
-  <header>
-    <div class="logo">🖼️</div>
-    <h1>Everloom</h1>
-    <p class="tag">A private, on-device home for your photos. AI search, albums and face grouping — with your memories staying on <em>your</em> device, never mined in someone else’s cloud.</p>
-    <a class="cta" href="#">Coming soon to the App Store</a>
-  </header>
+<body><div class="wrap">
 
-  <div class="promise">
-    <h2>Google Photos’ magic. None of Google’s eyes.</h2>
-    <p class="tag" style="margin:0 auto">No ads. No trackers. No account. Nothing leaves your device.</p>
-  </div>
+<header>
+  <div class="kicker">Photo library · iPhone, iPad &amp; Mac</div>
+  <h1>Your photos, searchable — and still only yours.</h1>
+  <p class="stand">Type “beach”, “dog” or “birthday” and the right pictures appear. The part that usually requires a cloud happens on your own device instead, so nothing is uploaded and nothing is scanned by anyone.</p>
+  <a class="get" href="https://apps.apple.com/app/id6789187434">Get Everloom</a>
+</header>
 
-  <section class="grid">
-    <div class="feat"><div class="emoji">🔎</div><h3>Search by what’s in them</h3><p>Type “beach”, “dog” or “birthday” and find the photo instantly — computed on-device, fully offline.</p></div>
-    <div class="feat"><div class="emoji">🧑‍🤝‍🧑</div><h3>People, grouped privately</h3><p>Everloom finds and groups faces right on your device. No cloud scanning, ever.</p></div>
-    <div class="feat"><div class="emoji">🗂️</div><h3>Smart albums</h3><p>Organize memories into albums and rediscover them over time.</p></div>
-    <div class="feat"><div class="emoji">🔒</div><h3>Private by design</h3><p>We run no servers that hold your content. We literally cannot see your photos.</p></div>
-    <div class="feat"><div class="emoji">☁️</div><h3>Your iCloud, your rules</h3><p>Optional backup uses your own iCloud storage — a service between you and Apple.</p></div>
-    <div class="feat"><div class="emoji">🖥️</div><h3>Everywhere</h3><p>iPhone, iPad, Mac, Apple TV and Apple Vision Pro.</p></div>
-  </section>
-
-  <footer>
-    Everloom · © 2026 Hugo Moriceau<br>
-    <a href="privacy.html">Privacy Policy</a> · <a href="support.html">Support</a> ·
-    <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms of Use (EULA)</a>
-  </footer>
+<div class="wall" aria-hidden="true">
+  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
 </div>
-</body>
-</html>
+<p class="cap">A timeline that stays fast when the library is large.</p>
+
+<div class="search">
+  <div class="field"><span><b>beach</b> — 34 photos, found in 0.2 s, on this device</span></div>
+  <div class="res"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <p class="note">No request was made to any server to produce this result. There is no server to make it to.</p>
+</div>
+
+<section>
+  <h2>What it actually does</h2>
+  <div class="two">
+    <div>
+      <h3>Search by content</h3>
+      <p>Everloom reads what is in a picture using Apple's on-device vision models, so plain words find the right photos without anyone else ever seeing them.</p>
+    </div>
+    <div>
+      <h3>Group faces</h3>
+      <p>Faces are recognised and grouped locally. The groupings are yours; no face print is transmitted, shared or matched against anything outside your device.</p>
+    </div>
+    <div>
+      <h3>Smart albums</h3>
+      <p>Albums that fill themselves from what is in the photos, alongside the ones you make by hand.</p>
+    </div>
+    <div>
+      <h3>On This Day</h3>
+      <p>What you were doing on this date in previous years, surfaced quietly rather than as a notification demanding attention.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Why “offline-first” is the whole product</h2>
+  <p>Every large photo service works the same way: you upload, they index, and the index is the product. The features are genuinely good, and the price is that a company holds a copy of your family, your home and your documents, searchable, forever.</p>
+  <p>Everloom is the same features with that step removed. <b>The indexing runs on your hardware.</b> It costs you a few minutes of battery the first time and it costs me the ability to know anything about you — which is the point. There are no servers behind this app, so there is no breach that can expose your photos and no policy change that can start mining them.</p>
+</section>
+
+<section>
+  <h2>Free, and what Premium adds</h2>
+  <p>The gallery, the timeline, albums, On This Day and basic search are free and unlimited in time. <b>Premium</b> is an optional subscription that unlocks the advanced AI search along with unlimited albums and face groups, sold monthly, annually with a seven-day trial, or once as a Lifetime purchase.</p>
+  <div class="frank">
+    <b>Honest about the limits</b>
+    <ul>
+      <li><b>The first index takes a while</b> on a large library, and it wants the device plugged in. That is the cost of not sending your photos to a data centre.</li>
+      <li><b>On-device search is not omniscient.</b> It is very good at objects, places and scenes; it will not find “the photo where Anna looked annoyed”.</li>
+      <li><b>Nothing syncs.</b> No account means no account to compromise — and also no shared library across devices. Albums you build on the iPhone do not appear on the Mac.</li>
+      <li><b>It is not a backup.</b> Everloom organises the photos on your device; it does not store a second copy for you. Keep a backup.</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+<footer>
+  <a href="support.html">Support</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy</a> &nbsp;·&nbsp;
+  <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms of Use</a><br><br>
+  © 2026 Hugo Moriceau &nbsp;·&nbsp; hugomoriceau@icloud.com
+</footer>
+</body></html>
