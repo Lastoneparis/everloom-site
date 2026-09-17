@@ -28,7 +28,7 @@ footer{border-top:1px solid var(--rule);margin-top:66px;padding:32px 0 72px;colo
 
 <h2>The short version</h2>
 <div class="box">
-  <p style="margin:0">Everloom has no servers, no account and no sign-in. <b>Your photos are never uploaded, and I never receive any personal data from this app.</b> Everything the app does with your pictures — the timeline, the search index, the face grouping, the albums — is computed and stored on the device you are holding.</p>
+  <p style="margin:0">Everloom has no servers, no account and no sign-in. <b>Your photos are never uploaded, and I never receive any personal data from this app.</b> Everything the app does with your pictures — the timeline, the search index, the face grouping — is computed and stored on the device you are holding. The one exception is described below: with Premium, your <i>album names</i> can be backed up to <i>your own</i> iCloud, never to me.</p>
 </div>
 
 <h2>Photo library access</h2>
@@ -43,6 +43,15 @@ footer{border-top:1px solid var(--rule);margin-top:66px;padding:32px 0 72px;colo
   <li>Deleting the app deletes all of it. Turning face grouping off in the app's settings removes the groupings it built.</li>
 </ul>
 <p>Because none of it leaves the device, I am not in a position to disclose it, lose it or be compelled to hand it over.</p>
+
+<h2>Album backup to your own iCloud (Premium)</h2>
+<p>Premium includes an album backup, and it is the one feature that writes anything off the device — so it is described exactly. When it is on, Everloom stores <b>your album names and, for each album, Apple's cloud identifiers for the photos in it</b> in <b>your own iCloud key-value store</b>, under your own Apple Account.</p>
+<ul>
+  <li><b>No photograph is uploaded</b> — a cloud identifier is a reference to a picture that already lives in your iCloud Photos, not the picture.</li>
+  <li>It goes to <b>your</b> iCloud, not to any server of mine. I have no account with which to read it, and Apple's key-value store is private to you.</li>
+  <li>It is what makes an album you built on the iPhone appear on the Mac.</li>
+  <li>Apple's own privacy policy governs iCloud. Turning off iCloud for Everloom in your system settings stops it; so does not subscribing.</li>
+</ul>
 
 <h2>The search index</h2>
 <p>Content search works by reading your photos with Apple's on-device vision models and storing keywords next to them locally. The index is an ordinary file in the app's storage. It never leaves the device and is included in an encrypted device backup if you make one.</p>
